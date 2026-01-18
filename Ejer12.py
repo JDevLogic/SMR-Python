@@ -8,6 +8,6 @@ edad_personal = int(input("Introduzca su edad: "))
 
 altura_personal = float(input("Introduzca su altura: "))
 
-ciudad_personal = input("Introduzca la cuidad donde vive: ")
+ciudad_personal = input("Introduzca la ciudad donde vive: ")
 
-print(f"Nombre: {nombre_personal}.\nEdad: {edad_personal} años.\nAltura: {altura_personal}.\nCuidad: {ciudad_personal}.")
+print(f"Nombre: {nombre_personal}.\nEdad: {edad_personal} años.\nAltura: {altura_personal}.\nCiudad: {ciudad_personal}.")
