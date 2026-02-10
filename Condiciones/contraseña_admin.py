@@ -21,15 +21,24 @@ if usuario == root:
         for letra in contraseña:
             if letra.isupper() :
                 es_mayus = True
-
             if letra.isdigit():
                 hay_digit = True
-
-
-            
         
+        if es_mayus and hay_digit:
+            print(f"La contraseña cumple con las condiciones.\nACCESO CONCEDIDO")
+        elif es_mayus or hay_digit:
+            print("La contraseña solo cumple con una de las condiciones. ")
+            if es_mayus == False:
+                print("La contraseña le falta una mayuscula. ")
+            elif hay_digit == False:
+                print("La contraseña le falta un numero. ")
+        else:
+            print("La contraseña no cumple con las condiciones")
+    
+    elif numero_letras <8:
+        print("La contraseña no cumple con los minimos caracteres. ")
 
-elif usuario != root:
+else:
     print("El usuario es incorrecto. ")
 
 
