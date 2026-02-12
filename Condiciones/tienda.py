@@ -6,3 +6,46 @@ obtienen un 5% adicional. Muestra el precio final.
 
 """
 
+compra = int(input("Introduce el total de la compra: "))
+socio = input("Introduce si eres socio (si/no): ").lower()
+
+porcentaje_descuento = 0
+
+if compra <50:
+    
+    if socio == "si":
+        porcentaje_descuento += 0.05
+    
+    descuento = compra * porcentaje_descuento
+    total_compra = compra - descuento
+    descu = porcentaje_descuento *100 
+ 
+    print(f"Recibes el {descu}% de descuento, por tener compras menor a 50. ")
+    print(f"Tu total de la compra seria: de {total_compra}")
+    
+    
+elif compra >=50 and compra <=150:
+    porcentaje_descuento += 0.05
+    
+    if socio == "si":
+        porcentaje_descuento += 0.05
+    
+    descuento = compra * porcentaje_descuento
+    total_compra = compra - descuento
+    descu = porcentaje_descuento *100 
+
+    print(f"Recibes el {descu}% de descuento, por tener compras entre 50 y 150€. ")
+    print(f"Tu total de la compra seria: de {total_compra}")
+
+elif compra >150:
+    porcentaje_descuento += 0.10
+    
+    if socio == "si":
+        porcentaje_descuento += 0.05
+
+    descuento = compra * porcentaje_descuento
+    total_compra = compra - descuento
+    descu = porcentaje_descuento *100 
+
+    print(f"Recibes el {descu}% de descuento, por tener compras superiores a 150€. ")
+    print(f"Tu total de la compra seria: de {total_compra}")
