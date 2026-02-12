@@ -28,4 +28,4 @@ total_compra = compra - descuento
 descu = porcentaje_descuento * 100 
 
 print(f"Recibes el {descu}% de descuento")
-print(f"Tu total de la compra seria: de {total_compra}")
+print(f"Tu total de la compra seria de: {total_compra}€.")
