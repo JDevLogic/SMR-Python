@@ -17,46 +17,33 @@ qué tarifa le toca (normal / infantil / descuento).
 
 """
 
-acceso = input("Introduce tu tipo de acceso bono / entrada de dia: ").lower()
+acceso = input("Introduce tu tipo de acceso bono / entrada: ").lower()
 edad = int(input("Introduce tu edad: "))
 hora = int(input("Introduce tu hora de ingreso: "))
 ocupacion = int(input("Introduce la ocupacion actual: "))
 
-if ocupacion >= 95:
-    if acceso == "bono":
-        print("El aforo está casi lleno pero puedes acceder por tener el bono. ")
-        
-        if edad <12:
-            
-            if hora >= 10 and hora <= 19:
-                print("PUEDES ENTRAR\nTARIFA INFANTIL\nTienes menos de 12 años, pero puedes acceder porque son las 10 y las 19 (incluidas). ")
-            else:
-                print("NO PUEDES ENTRAR\nTienes menos de 12 años y no estas dentro del horario. ")
 
-        elif edad > 65:
+if ocupacion >= 95 and acceso != "bono":
+    print("NO PUEDES ACCEDER\nPorque no tienes bono y esta casi lleno. ")
 
-            if hora < 16 or hora > 20:
-                print("PUEDES ENTRAR\nTIENES DESCUENTO\nPor ser mayor de 65 años y estas fuera de las horas punta. ")
-            else:
-                print ("PUEDES ENTRAR\nTARIFA NORMAL\nPorque no estas fuera de las horas punta.")
-        else:
-            print("PUEDES ENTRAR\n TARIFA NORMAL")
+
+elif edad <12 and not(hora >= 10 and hora <=19):
+    print("NO PUEDES ACCEDER\nPorque eres menor de 12 y solo pueden entrar entre las 10 y las 19 (incluidas). ")
+
+else:
+    print("PUEDES ENTRAR")
+    
+    if edad < 12:
+        print("TARIFA INFANTIL")
+    
+    elif edad > 65 and (hora < 16 or hora > 20):
+        print("TARIFA CON DESCUENTO")
+    
     else:
-        print("No puedes acceder porque el aforo esta casi lleno.")
+        print("TARIFA NORMAL")
 
-elif ocupacion >= 0 and ocupacion <95:
-    if edad <12:
-        if hora >= 10 and hora <= 19:
-            print("PUEDES ENTRAR\nTARIFA INFANTIL\nTienes menos de 12 años, pero puedes acceder porque son las 10 y las 19 (incluidas). ")
-        else:
-            print("NO PUEDES ENTRAR\nTienes menos de 12 años y no estas dentro del horario. ")
 
-    elif edad > 65:
-        if hora < 16 or hora > 20:
-            print("PUEDES ENTRAR\nTIENES DESCUENTO\nPor ser mayor de 65 años y estas fuera de las horas punta. ")
-        else:
-            print ("PUEDES ENTRAR\nTARIFA NORMAL\nPorque no estas dentro del horario")
 
-    else:
-        print("PUEDES ENTRAR\nTARIFA NORMAL")
+
+
 
