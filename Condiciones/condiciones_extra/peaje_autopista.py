@@ -36,31 +36,28 @@ precio_base = 0
 print(f"\nElegiste el tipo de vehiculo {tipo}y recorriste {kilometros}km.\n")
 
 if tipo == "moto":
-    precio_base = moto * kilometros
-    precio_total = precio_base
+    precio_total = moto * kilometros
 
 elif tipo == "coche":
-    precio_base = coche * kilometros
-    precio_total = precio_base
+    precio_total = coche * kilometros
 
 elif tipo == "furgoneta":
-    precio_base = furgoneta * kilometros
-    precio_total = precio_base
+    precio_total = furgoneta * kilometros
 
 elif tipo == "camion" or tipo == "camión":
-    precio_base = camion * kilometros
-    precio_total = precio_base
+    precio_total = camion * kilometros
+
+else: 
+    print("El tipo de vehiculo no valido.")
+    exit()
 
 
 if (hora >= 7 and hora <= 9) or (hora >= 17 and hora <= 19):
-    precio_recar = precio_total * recargo
-    precio_total += precio_recar
+    precio_total *= (1+recargo)
     print(f"TIENES UN RECARGO EN EL PRECIO del 25%")
 
-
 if kilometros > 200 and (tipo == "coche" or tipo == "furgoneta"):
-    desc = precio_total * descuento
-    precio_total -= desc
+    precio_total *= (1-descuento)
     print(f"TIENES UN DESCUENTO EN EL PRECIO del 10%")
 
 
