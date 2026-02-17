@@ -22,12 +22,19 @@ edad = int(input("Introduce tu edad: "))
 hora = int(input("Introduce tu hora de ingreso: "))
 ocupacion = int(input("Introduce la ocupacion actual: "))
 
+if hora < 0 or hora > 23:
+    print("Hora invalida")
+    exit()
+
+elif ocupacion < 0 or ocupacion > 100:
+    print("Ocupación inválida")
+    exit()
 
 if ocupacion >= 95 and acceso != "bono":
     print("NO PUEDES ACCEDER\nPorque no tienes bono y esta casi lleno. ")
 
 
-elif edad <12 and not(hora >= 10 and hora <=19):
+elif edad <12 and (hora < 10 or hora > 19):
     print("NO PUEDES ACCEDER\nPorque eres menor de 12 y solo pueden entrar entre las 10 y las 19 (incluidas). ")
 
 else:
@@ -41,9 +48,3 @@ else:
     
     else:
         print("TARIFA NORMAL")
-
-
-
-
-
-
