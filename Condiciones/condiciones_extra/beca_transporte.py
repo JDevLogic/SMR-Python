@@ -34,29 +34,31 @@ cuantia = 0
 
 if distancia < 5:
     print("\nNo tienes beca, porque la distancia es menos de 5 km.")
+    exit()
 
 elif modalidad == "coche compartido" and distancia < 15:
     print("\nNo se permite beca porque tienes coche compartido y tu distancia desde casa es menor a 15km. ") 
+    exit()
 
-else:
-    if modalidad == "tren":
+
+if modalidad == "tren":
         umbral= umbral + 200
         print("El umbral se suma 200€, porque tu modalidad es tren")
     
-    if ingresos <= umbral:
-        print("\nLa beca se concede.")
+if ingresos <= umbral:
+    print("\nLa beca se concede.")
         
-        if distancia >= 5 and distancia <= 14:
-            cuantia = 25
-            print(f"Tu cuantia es de: {cuantia}€, porque la distancia es de 5-14km.")
+    if distancia >= 5 and distancia <= 14:
+        cuantia = 25
+        print(f"Tu cuantia es de: {cuantia}€, porque la distancia es de 5-14km.")
         
-        elif distancia >= 15 and distancia <= 29:
-            cuantia = 45
-            print(f"Tu cuantia es de: {cuantia}€, porque la distancia es de 15-29km.")
+    elif distancia >= 15 and distancia <= 29:
+        cuantia = 45
+        print(f"Tu cuantia es de: {cuantia}€, porque la distancia es de 15-29km.")
         
-        else:
-            cuantia = 65
-            print(f"Tu cuantia es de: {cuantia}€, porque la distancia es mayor a 30 km.")
-    
     else:
-        print("\nLa beca no se concede, porque tus ingresos son mayores que el umbral.")
+        cuantia = 65
+        print(f"Tu cuantia es de: {cuantia}€, porque la distancia es mayor a 30 km.")
+    
+else:
+    print("\nLa beca no se concede, porque tus ingresos son mayores que el umbral.")
