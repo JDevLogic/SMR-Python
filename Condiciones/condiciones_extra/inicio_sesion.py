@@ -29,27 +29,29 @@ contraseña = input("Introduce la contraseña: ")
 user = "admin"
 password = "Python2026"
 
+intentos_restantes = 0
+
 if intentos >= 5:
     print("Tu cuenta esta bloqueada, porque el numero de intentos son 5 o mas.")
+    exit()
+
+
+if usuario != user:
+    print("\nUsuario incorrecto.")
+    intentos =+ 1
+    
+    
+elif contraseña != password:
+    print("\nContraseña incorrecto.")
+    intentos =+ 1
 
 else:
 
-    if usuario != user:
-        print("\nUsuario incorrecto.")
-        intentos = intentos + 1
-    
+    print("\nACCESO CONCEDIDO.")
+    intentos = 0
+    print("Tu intentos se restablecen a 0.")
 
-
-    elif contraseña != password:
-        print("\nContraseña incorrecto.")
-        intentos = intentos + 1
-
-    else:
-         
-        if usuario == user and contraseña == password:
-            print("\nACCESO CONCEDIDO.")
-            intentos = 0
-            print("Tu intentos se restablecen a 0.")
+intentos_restantes = 5 - intentos
     
-    print(f"Tu numero total de intentos son: {intentos}\n")
-    
+print(f"Tu numero total de intentos son: {intentos}\n")
+print(f"Tu numero de intentos restantes son: {intentos_restantes}\n")    
