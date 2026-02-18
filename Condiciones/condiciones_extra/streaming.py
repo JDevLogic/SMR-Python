@@ -24,44 +24,37 @@ Muestra el coste (mensual o anual) y explica el cálculo
 
 plan = input("Introduce tu plan (basic / standard / premium): ").lower()
 dispositivos = int(input("Introduce el numero de dispositivos: "))
-anual = input("Introduce si el pago es anual o no (si / no): ")
+anual = input("Introduce si el pago es anual o no (si / no): ").lower().replace("í","i")
 
-precio_basic = 7.99
-precio_standart = 11.99
-precio_premium = 15.99
+precio = 0
 
-maximo_disp = 0
-
-if plan == "basico":
-    maximo_disp = 1
-
-elif plan == "standart":
-    maximo_disp = 2
-
-elif plan == "premium":
-    maximo_disp = 4
-else:
-    print("El plan no existe. ")
-    exit()
-
-if dispositivos > maximo_disp:
+if plan == "basico" and dispositivos > 1:
     print(f"Supera el máximo del plan {plan}.")
     exit()
-else:
-    
-    if plan == "basico":
-        precio = precio_basic
+
+elif plan == "standart"and dispositivos > 2:
+    print(f"Supera el máximo del plan {plan}.")
+    exit()
+
+elif plan == "premium"and dispositivos >4:
+    print(f"Supera el máximo del plan {plan}.")
+    exit()   
+
+if plan == "basico":
+        precio = 7.99
         
-    elif plan == "standart":
-        precio = precio_standart
+elif plan == "standart":
+        precio = 11.99
 
-    elif plan == "premium":
-        precio = precio_premium
+elif plan == "premium":
+        precio = 15.99
 
-    
-    if anual == "si":
-        precio_anual = precio * 10
-        print(f"PRECIO ANUAL\nEl precio anual a pagar es de: {precio_anual}€.")
-    
-    else:
-        print (f"PRECIO MENSUAL\nEl precio mensual a pagar es de: {precio}€.") 
+else:
+    print("El plan no existe.")
+    exit()
+
+if anual == "si":
+    print(f"PRECIO ANUAL\nEl precio anual a pagar es de: {precio * 10}€.")
+   
+else:
+    print (f"PRECIO MENSUAL\nEl precio mensual a pagar es de: {precio}€.") 
