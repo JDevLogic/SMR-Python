@@ -23,13 +23,11 @@ sellado = input("Introduce si el envase estaba sellado (sí / no): ").lower().re
 if sellado == "no" and horas > 2:
     print("\nNO APTO\nPorque no estaba sellado y estuvo fuera mas de 2 horas.")
 
-else:
+elif temperatura >8 and horas > 1:
+    print("\nNO APTO\nPorque su temperatura es mayor a 8ºC y estuvo fuera más de 1 hora")
 
-    if temperatura >8 and horas > 1:
-        print("\nNO APTO\nPorque su temperatura es mayor a 8ºC y estuvo fuera más de 1 hora")
-
-    elif (temperatura >= 5 and temperatura <= 8) and horas > 4:
-        print("\nNO APTO\nPorque la temperatura esta entre 5°C y 8°C (incluidos) y estuvo fuera más de 4 horas")
+elif (temperatura >= 5 and temperatura <= 8) and horas > 4:
+    print("\nNO APTO\nPorque la temperatura esta entre 5°C y 8°C (incluidos) y estuvo fuera más de 4 horas")
     
-    else:
-        print("\nAPTO\nPorque no se ha incumplido ninguna regla para su consumo. ")
+else:
+    print("\nAPTO\nPorque no se ha incumplido ninguna regla para su consumo. ")
