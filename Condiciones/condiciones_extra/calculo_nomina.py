@@ -20,25 +20,27 @@ Muestra bruto, retención en euros, neto y una frase explicando qué reglas se a
 
 salario = float(input("Introduce tu salario bruto mensual: "))
 contrato = input("Introduce tu tipo de contrato (indefinido / temporal): ").lower()
-nocturnidad = input("Introduce si trabajas de noche o no (si / no)").lower()
+nocturnidad = input("Introduce si trabajas de noche o no (si / no): ").lower().replace("í","i")
 
 porcentaje = 0
-
-if salario <= 1400:
-    porcentaje = 0.08
-    print(f"\nSe aplica el 8% de retencion, porque tu salario es de hasta 1400€.")
-
-elif salario < 2200:
-    porcentaje = 0.12
-    print(f"\nSe aplica el 12% de retencion, porque tu salario es de 1400.01 a 2200 €. ")
-
-else:
-    porcentaje = 0.16
-    print(f"\nSe aplica el 16% de retencion, porque tu salario es más de 2200 €. ")
+motivo_retencion = ""
+motivo_nocturnidad = "No se aplica el plus de nocturnidad."
 
 if contrato == "temporal" and salario < 1200:
     porcentaje = 0.06
-    print(f"\nSe aplica el 6% de retencion, porque tu contrato es temporal y el bruto es menor de 1200 €. ")
+    motivo_retencion = "Se aplica el 6% de retencion, porque tu contrato es temporal y el bruto es menor de 1200 €. "
+
+elif salario <= 1400:
+    porcentaje = 0.08
+    motivo_retencion = "Se aplica el 8% de retencion, porque tu salario es de hasta 1400€. "
+
+elif salario < 2200:
+    porcentaje = 0.12
+    motivo_retencion = "Se aplica el 12% de retencion, porque tu salario es de 1400.01 a 2200 €. "
+
+else:
+    porcentaje = 0.16
+    motivo_retencion = "Se aplica el 16% de retencion, porque tu salario es más de 2200 €. "
 
 
 retencion = salario * porcentaje
@@ -46,9 +48,10 @@ salario_neto = salario - retencion
 
 if contrato == "indefinido" and nocturnidad == "si":
     salario_neto =  salario_neto + 80
-    print(f"Se aplica el plus de nocturnidad, porque trabajas de noche y tu contrato es indefinido.\n ")
+    motivo_nocturnidad = "Se aplica el plus de nocturnidad, porque trabajas de noche y tu contrato es indefinido."
 
 
 print(f"\nTu salario bruto es de: {salario}€.")
-print(f"Tu retencion es de: {retencion}€.")
+print(motivo_retencion)
+print(motivo_nocturnidad)
 print(f"Tu salario neto es de: {salario_neto}€.\n")
