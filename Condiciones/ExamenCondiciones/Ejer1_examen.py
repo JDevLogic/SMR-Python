@@ -38,28 +38,33 @@ if ocupacion == 100:
 if ocupacion >= 90:
     if tipo == "profesor" or reserva:
         print("Acceso permitido, la ocupacion es del 90% o mas, eres profesor o tienes reserva.")
+    else:
+        print("Acceso denegado, la ocupacion es del 90% o mas y no eres profesor o tienes reserva.")
 
 else:
-    if edad > 16:
-        if tipo == "externo":
-            print("Acceso denegado, porque eres externo y tienes menos de 16 años.")
-            exit()
-        elif tipo == "alumno":
+    if tipo == "profesor":
+        print("Acceso permitido, porque eres profesor")
+    
+    elif tipo == "alumno":
+        if edad < 16:
             if hora >= 10 and hora <= 17:
-                (print("Acceso permitido, eres alumno tienes menos de 16 años y tu hora es 10 a 17"))
+               (print("Acceso permitido, eres alumno tienes menos de 16 años y tu hora es de 10 a 17"))
             else:
                 (print("Acceso denegado, eres alumno tienes menos de 16 años y no estas en la hora de 10 a 17"))
-    
-    elif edad >= 20 and edad <= 23:
-        if tipo == "alumno" and reserva:
-            print("Acceso permitido, porque eres alumno y tienes reserva.")             
-
-    if tipo == "externo":
-        if hora >= 10 and hora <= 18:
-            print("Acceso permitido, eres externo y has entrado entre las 10 y 18.")
         else:
-            print("Acceso denegado, eres externo y no has entrado entre las 10 y 18.")
+            if hora >= 20 and hora <= 23 :
+                if reserva:    
+                    print("Acceso permitido, porque eres alumno y son las horas de 20 a 23 y tienes reserva.")
+                else:
+                    print("Acceso denegado no tienes reserva. ")  
+            else:
+                print("Acceso denegado, porque no estas en las horas de 20 a 23.")   
     
-    
-
-            
+    elif tipo == "externo":
+        if edad < 16:
+            print("Acceso denegado, porque eres externo y tienes menos de 16 años.")
+        else:
+            if hora >= 10 and hora <= 18:
+                print("Acceso permitido, eres externo y has entrado entrAS las 10 y 18.")
+            else:
+                print("Acceso denegado, eres externo y no has entrado entre las 10 y 18.")
