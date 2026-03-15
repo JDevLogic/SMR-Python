@@ -50,7 +50,7 @@ AMARILLA si:
 
 El programa debe mostrar:
 - la prioridad final del paciente (VERDE / AMARILLA / ROJA)
-- una explicación breve del motivo principa 
+- una explicación breve del motivo principal 
 
 """
 
@@ -58,28 +58,73 @@ import random
 
 edad_paciente = int(input("Introduce la edad del paciente: "))
 temperatura = float (input("Introduce la temperatura corporal del paciente: "))
-saturación = int (input("Introduce la saturacion del paciente (0 - 100): "))
+saturacion = int (input("Introduce la saturacion del paciente (0 - 100): "))
 dolor = int (input("Introduce el nivel de dolor del paciente (0 - 10): "))
 
 dificultad_respiratoria = True
-enfermedad_previa = True
-paciente_caminando = True
+enfermedad_grave = True
+paciente_caminando = False
 
 alerta_hospital = random.randint(0,1)
 box_critico = random.randint(0,1)
 
+subida_escalado = False
+motivo = ""
 
-if saturacion < 0 or saturacion > 100 or dolor < 0 or dolor > 10 or temperatura < 30 or temperatura >45:
+if (saturacion < 0 or saturacion > 100) or (dolor < 0 or dolor > 10) or (temperatura < 30 or temperatura >45):
     print("Datos no validos")
+    exit()
+
+if saturacion < 90 or (dificultad_respiratoria and saturacion < 94) or (temperatura >= 40 and dolor >= 8):
+    prioridad = "ROJA"
+    motivo = "Saturacion menor de 90 o tienes dificultad respiratoria y tu saturacion es menor de 94 o tu temperatura es mayor o igual a 40 y tu dolor es mayor o igual a 8. "
+elif (saturacion >= 90 and saturacion <= 93) or (temperatura >= 39 and temperatura<= 39.9) or (dolor >= 7 and dolor <= 8):
+    prioridad = "AMARILLA"
+    motivo = "Saturacion esta entre 90 y 93 o tu temperatura esta entre 39 y 39.9 o tu dolor esta entre 7 y 8."
 else:
-    if saturacion < 90 or (dificultad and saturacion < 94) or (temperatura >= 40 and dolor >= 8):
-        prioridad = "ROJA"
-    elif saturacion >= 90 and saturacion <= 93 or temperatura >= 39 and temp <= 39.9 or dolor >= 7 and dolor <= 8:
+    prioridad = "VERDE"
+    motivo = "Cualquier otro caso."
+
+
+if edad_paciente >= 75 and (temperatura >= 38 or enfermedad_grave):
+    if prioridad == "VERDE":
         prioridad = "AMARILLA"
-    else:
-        prioridad = "VERDE"
+    elif prioridad == "AMARILLA":
+        prioridad = "ROJA"
+    motivo = "Se sube de nivel porque tienes 75 y tu temperatura es de 38 o mas o tienes una enfermedad grave."
+    subida_escalado = True
 
+if not paciente_caminando and (dolor >= 6 or dificultad_respiratoria):
+    if prioridad == "VERDE":
+        prioridad = "AMARILLA"
+    elif prioridad == "AMARILLA":
+        prioridad = "ROJA"
+    motivo = "Se sube de nivel porque no puedes caminar y tienes dolor 6 o mas o tienes dificultad respiratoria."
+    subida_escalado = True
 
+if edad_paciente < 12:
+    if temperatura >= 39 and dificultad_respiratoria:
+        prioridad = "ROJA"
+        motivo = "Porque eres menor de 12 años y tienes 39 o mas de temperatura y tienes dificultad respiratoria."
+    elif dolor >= 8:
+        if prioridad == "VERDE":
+            prioridad = "AMARILLA"
+            motivo = "Se sube de nivel del verde al amarillo, porque eres menor de 12 años y tienes dolor 8 o mas."
+    
+    if enfermedad_grave:
+        if prioridad == "VERDE":
+            prioridad = "AMARILLA"
+        elif prioridad == "AMARILLA":
+            prioridad = "ROJA"
+        motivo = "Se sube de nivel, porque eres menor de 12 años y tienes enfermedad grave."
 
+if alerta_hospital == 1 and prioridad == "AMARILLA" and (enfermedad_grave or edad_paciente >= 75):
+    prioridad = "ROJA"
+    motivo = "Hay una alerta hospitalaria y tu prioridad era amarilla y tienes una enfermedad grave o tu edad es de 75 o mas."
 
+if box_critico == 0 and prioridad == "ROJA" and subida_escalado:
+    if saturacion >= 95 and temperatura < 38 and dolor <= 5:
+        prioridad = "AMARILLA"
+        motivo = "Se baja de nivel porque no hay box critico y tu subida de nivel fue por solo edad o por no poder caminar."
 
+print(f"PRIORIDAD: {prioridad}\nMOTIVO: {motivo}")
