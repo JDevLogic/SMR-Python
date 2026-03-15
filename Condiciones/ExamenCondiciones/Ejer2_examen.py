@@ -47,43 +47,49 @@ cupon_descuento = input("Introduce si tienes cupon de descuento o no (si / no): 
 dia_promocional = random.randint(1,7)
 envio_express = random.randint(0,1)
 
+recargo = 0
+descuento = 0
+
 if importe <= 0:
     print("Importe no valido.")
+    exit()
+
+
+if tipo_cliente == "premium":
+    descuento = 10
+    print("Tu descuento es del 10% porque eres premium.")
+
+elif tipo_cliente == "empresa" and importe >= 200:
+    descuento = 15
+    print("Tu descuento es del 15% porque eres empresa y tu importe es mayor o igual a 200.")
+
+if cupon_descuento == "si" and not(tipo_cliente == "empresa" and importe >= 200):
+    descuento += 5
+    print("Se aplica un 5% extra")
+
+if (dia_promocional == 6 or dia_promocional == 7) and tipo_cliente == "premium":
+    descuento += 5
+    print("Se aplica un 5% extra porque es dia promocional es 6 o 7 y eres premium.")
+
+total = importe *((100 - descuento)/100) 
+
+if envio_express == 1:
+    if total + 12 > 100:
+        recargo = 5
+        print("El recargo final es de 5€ porque supero los 100€")
+        total += recargo
+    
+    else:
+        recargo = 12
+        total += recargo
+        print("Hay envio express, se añaden 12 € al precio.")
+
+if metodo_pago == "paypal" and total > 300:
+    print("Compra no permitida porque Paypal no permite si el total supera 300€")
+
+elif metodo_pago == "transferencia" and total < 20:
+    print("Compra no permitida porque es transferencia y el total es menor de 20€.") 
 
 else:
-    descuento = 0
-    
-    if tipo_cliente == "premium":
-        descuento = 10
-        print("Tu descuento es del 10% porque eres premium.")
-    elif tipo_cliente == "empresa" and importe >= 200:
-        descuento = 15
-        print("Tu descuento es del 15% porque eres empresa y tu importe es mayor o igual a 200.")
-    
-    if cupon_descuento == "si" and not(tipo_cliente == "empresa" and importe >= 200):
-        descuento += 5
-        print("Se aplica un 5% extra")
-
-    if (dia_promocional == 6 or dia_promocional == 7) and tipo_cliente == "premium":
-        descuento += 5
-        ("Se aplica un 5% extra porque es dia promocional es 6 o 7 y eres premium.")
-    
-    total = importe *(descuento/100)
-
-    if envio_express == 1:
-        recargo = 12
-        print("Hay envio express, se añaden 12 € al precio.")
-    
-    if total + recargo > 100:
-        recargo = 5
-        total += recargo
-        print("El recargo es de 5 porque supero los 100")
-    
-    if metodo == "paypal" and total > 300:
-        print("Compra no permitida porque Paypal no permite si el total supera 300€")
-    elif metodo == "tranferencia" and total < 20:
-        print("Compra no permitida porque es transferencia y el total es menor de 20€.") 
-
-    else:
-        print("Compra valida.")
-        print(f"{total:.2f}")   
+    print("Compra valida.")
+    print(f"{total:.2f}")   
